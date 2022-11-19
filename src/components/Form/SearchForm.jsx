@@ -1,7 +1,7 @@
-import {Component} from 'react'
+import {Component} from 'react';
 import PropTypes from 'prop-types';
-import {SearchFormStyled,SearchFormButtonStyled} from './SearchForm.styled'
-
+import {SearchFormStyled,SearchFormButtonStyled} from './SearchForm.styled';
+import SearchFormInput from './SearchFormInput/SearchFormInput';
 import {FiSearch} from "react-icons/fi";
 
 class SearchForm  extends Component{
