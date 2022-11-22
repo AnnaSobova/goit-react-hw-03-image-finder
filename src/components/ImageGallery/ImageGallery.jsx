@@ -1,5 +1,5 @@
 import ImageGalleryStyled from './ImageGallery.styled';
-import ImageGalleryItem from 'components/ImageGalleryItem/ImageGallertItem';
+import ImageGalleryItem from '../ImageGalleryItem/ImageGalleryItem';
 
 const ImageGallery = ({galleryList, onClick, imageURL})=> (
     <>
