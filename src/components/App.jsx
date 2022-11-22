@@ -8,36 +8,36 @@ import Searchbar from './Searchbar/Searchbar';
 import AppStyled from './Form/App.styled';
 
 export class App extends Component {
-  state ={
+  state = {
     gallery: [],
-    page:1,
-    querry:'',
-    total:null,
-    loading:false,
-    imageURL:null,
+    page: 1,
+    query: '',
+    total: null,
+    loading: false,
+    imageURL: null,
   };
-   
-  componentDidUpdate(_,prevState){
-    if(prevState.gallery !== this.state.gallery){
-      this.setState({loading:false});
+
+  componentDidUpdate(_, prevState) {
+    if (prevState.gallery !== this.state.gallery) {
+      this.setState({ loading: false });
     }
   }
-  
-  handleSubmit = query =>{
-    if(query.trim().length ===0){
-      return
-    }
-   
-    this.setState({ query, loading: true });
 
+  handleSubmit = query => {
+    if (query.trim().length === 0) {
+      return;
+    }
+
+    this.setState({ query, loading: true });
 
     getImage(query, this.state.page).then(data =>
       this.setState({
-      gallery:[...data.hits],
-      total: data.totalHits,
-    }));
+        gallery: [...data.hits],
+        total: data.totalHits,
+      })
+    );
   };
-     
+
   handleLoadMoreBtn = async () => {
     await this.setState(prevState => {
       return { page: prevState.page + 1, loading: true };
@@ -49,31 +49,32 @@ export class App extends Component {
     );
   };
 
-  onClickGalleryImage = imageURL=>{
-    this.setState({imageURL});
+  onClickGalleryImage = imageURL => {
+    this.setState({ imageURL });
   };
-  render (){
-    const {gallery,imageURL,total} = this.state;
-    return(
+
+  render() {
+    const { gallery, imageURL, total } = this.state;
+
+    return (
       <AppStyled>
         <Searchbar>
-          <SearchForm onSubmit={this.handleSubmit}/>
+          <SearchForm onSubmit={this.handleSubmit} />
         </Searchbar>
-        {gallery.length>0 &&( 
+        {gallery.length > 0 && (
           <>
-          <ImageGallery
-          galleryList={gallery}
-          onClick={this.onClickGalleryImage}
-          imageURL={imageURL}
-          />
-          {total !==gallery.length && (
-            <Button text ="Load more" onClick ={this.handleLoadMoreBtn} />
-          )}
+            <ImageGallery
+              galleryList={gallery}
+              onClick={this.onClickGalleryImage}
+              imageURL={imageURL}
+            />
+            {total !== gallery.length && (
+              <Button text="Load more" onClick={this.handleLoadMoreBtn} />
+            )}
           </>
         )}
-        {this.state.loading&& <Loader/>}
+        {this.state.loading && <Loader />}
       </AppStyled>
     );
   }
-
 }

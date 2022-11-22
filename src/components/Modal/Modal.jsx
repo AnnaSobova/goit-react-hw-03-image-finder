@@ -2,45 +2,42 @@ import {Component} from 'react';
 import PropTypes from 'prop-types';
 import {ModalStyled,OverlayStyled} from './Modal.styled';
 
-
-
 class Modal extends Component {
-    componentDidMount(){
-        window.addEventListener('keydown', this.handleKeyDown);
-        window.addEventListener('click', this.handleBackdropClick);
+  componentDidMount() {
+    window.addEventListener('keydown', this.handleKeyDown);
+    window.addEventListener('click', this.handleBackdropClick);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('keydown', this.handleKeyDown);
+    window.removeEventListener('click', this.handleBackdropClick);
+  }
+
+  handleKeyDown = e => {
+    if (e.code === 'Escape') {
+      this.props.onClose();
     }
+  };
 
-    componentWillUnmount(){
-        window.removeEventListener('keydown', this.handleKeyDown);
-        window.removeEventListener('click', this.handleBackdropClick);
+  handleBackdropClick = e => {
+    if (e.target === e.currentTarget) {
+      this.props.onClose();
     }
+  };
 
-    handleKeyDown= e =>{
-        if (e.code === 'Escape'){
-            this.props.onClose();
-        }
-    };
-   
-    handleBackdropClick =e =>{
-        if (e.target === e.currentTarget){
-            this.props.onClose();
-        }
-    };
-
-  render(){
+  render() {
     return (
-        <OverlayStyled onClick={this.handleBackdropClick}>
+      <OverlayStyled onClick={this.handleBackdropClick}>
         <ModalStyled>
           <img src={this.props.src} alt="" />
         </ModalStyled>
       </OverlayStyled>
-    )
+    );
   }
-
 }
+
 export default Modal;
 
-Modal.propType={
-    src: PropTypes.string.isRequired,
-
+Modal.propType = {
+  src: PropTypes.string.isRequired,
 };
