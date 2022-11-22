@@ -5,7 +5,7 @@ import Button from './Button/Button';
 import ImageGallery from './ImageGallery/ImageGallery';
 import SearchForm from './Form/SearchForm';
 import Searchbar from './Searchbar/Searchbar';
-import AppStyled from './Form/App.styled';
+import AppStyled from './App.styled';
 
 export class App extends Component {
   state = {
