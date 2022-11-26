@@ -2,7 +2,7 @@ import ImageGalleryItemImageStyled from './ImageGalleryItemImage.styled';
 import PropTypes from 'prop-types';
 
 const ImageGalleryItemImage = ({ src }) => (
-  <ImageGalleryItemImageStyled src={src} />
+  <ImageGalleryItemImageStyled src = {src}/>
 );
 
 export default ImageGalleryItemImage;

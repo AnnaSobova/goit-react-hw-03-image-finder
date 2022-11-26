@@ -9,7 +9,6 @@ class SearchForm  extends Component{
       text:'', 
     };
 
-
 handleChange = event =>{
     this.setState({text:event.currentTarget.value});
 }

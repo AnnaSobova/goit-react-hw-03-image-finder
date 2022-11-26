@@ -1,7 +1,7 @@
-import Modal from '../Modal/Modal';
 import {Component} from 'react';
-import ImageGalleryItemStyled from './ImageGalleryItem.styled';
 import PropTypes from 'prop-types';
+import Modal from '../Modal/Modal';
+import ImageGalleryItemStyled from './ImageGalleryItem.styled';
 import ImageGalleryItemImage from './ImageGalleryItemImage/ImageGalleryItemImage'
 
 class ImageGalleryItem extends Component{
@@ -16,7 +16,7 @@ showModal = ()=>{
 
 openGalleryItemModal = id=>{
     this.showModal();
-    const galleryItem = this.props.galleryList.filter(item=> item.id === id);
+    const galleryItem = this.props.galleryList.filter(item => item.id === id);
     this.setState({largeImage:galleryItem[0].largeImageURL});
 };
 
