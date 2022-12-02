@@ -5,12 +5,12 @@ import {ModalStyled,OverlayStyled} from './Modal.styled';
 class Modal extends Component {
   componentDidMount() {
     window.addEventListener('keydown', this.handleKeyDown);
-    window.addEventListener('click', this.handleBackdropClick);
+    // window.addEventListener('click', this.handleBackdropClick);
   }
 
   componentWillUnmount() {
     window.removeEventListener('keydown', this.handleKeyDown);
-    window.removeEventListener('click', this.handleBackdropClick);
+    // window.removeEventListener('click', this.handleBackdropClick);
   }
 
   handleKeyDown = e => {
