@@ -1,4 +1,5 @@
-import {Component} from 'react'
+
+import { Component } from 'react';
 import getImage from 'request-api/request-api';
 import Loader from './Loader/Loader';
 import Button from './Button/Button';
@@ -18,85 +19,53 @@ export class App extends Component {
   };
 
   componentDidUpdate(_, prevState) {
-      if (prevState.query !== this.state.query || 
-        prevState.page !== this.state.page){
-
-        return this.update();
-      }
+    if (
+      prevState.query !== this.state.query ||
+      prevState.page !== this.state.page
+    ) {
+      return this.update();
     }
-    async update(){
-      this.setState({loading:true});
-      try {
-      await getImage(this.state.query,this.state.page).then(res=>{
-        if (!res.data.hits.length){
+  }
+  async update() {
+    this.setState({ loading: true });
+    try {
+      await getImage(this.state.query, this.state.page).then(res => {
+        if (!res.hits.length) {
           return console.log(
             'There is no images with this request. Please, try again'
-      );
-      }
-       this.setState(prevState => {
-        return{
-          gallery: [...prevState.gallery, ...res.data.hits],
-            total: res.data.totalHits,
+          );
+        }
+        this.setState(prevState => {
+          return {
+            gallery: [...prevState.gallery, ...res.hits],
+            total: res.totalHits,
           };
-       });
-      }); 
-      } catch (error){
-        console.log('Error');
-      } finally{
-        this.setState({loading:false})
-      } 
-    }
-
-    handleSubmit = query => {
-      if (query.trim().length === 0) {
-            return;
-          }
-        this.setState({
-          gallery: [],
-          page: 1,
-          total: null,
-          imageURL: null,
         });
-    
-        handleLoadMoreBtn = () => {
-          this.setState(prevState => {
-            return { page: prevState.page + 1 };
-          })
-            };
-            
-          
-  // componentDidUpdate(_, prevState) {
-  //   if (prevState.query !== this.state.query) {
-  //     this.setState({ loading: false });
-  //   }
-  // }
-
-  // handleSubmit = query => {
-  //   if (query.trim().length === 0) {
-  //     return;
-  //   }
-
-  //   this.setState({ query, loading: true });
-
-  //   getImage(query, this.state.page).then(data =>
-  //     this.setState({
-  //       gallery: [...data.hits],
-  //       total: data.totalHits,
-  //     })
-  //   );
-  // };
-
-  // handleLoadMoreBtn = async () => {
-  //   await this.setState(prevState => {
-  //     return { page: prevState.page + 1, loading: true };
-  //   });
-  //   getImage(this.state.query, this.state.page).then(data =>
-  //     this.setState(prevState => {
-  //       return { gallery: [...prevState.gallery, ...data.hits] };
-  //     })
-  //   );
+      });
+    } catch (error) {
+      console.log('Error', error);
+    } finally {
+      this.setState({ loading: false });
+    }
+  }
+  handleLoadMoreBtn = () => {
+    this.setState(prevState => {
+      return { page: prevState.page + 1 };
+    });
   };
 
+  handleSubmit = query => {
+    if (query.trim().length === 0) {
+      return;
+    }
+    this.setState({
+      gallery: [],
+      page: 1,
+      total: null,
+      imageURL: null,
+      query: query,
+    });
+  };
 
   onClickGalleryImage = imageURL => {
     this.setState({ imageURL });

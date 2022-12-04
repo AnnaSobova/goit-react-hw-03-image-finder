@@ -27,7 +27,7 @@ class Modal extends Component {
 
   render() {
     return (
-      <OverlayStyled onClick={this.handleBackdropClick}>
+      <OverlayStyled onClick={this.handleKeyDown}>
         <ModalStyled>
           <img src={this.props.src} alt="" />
         </ModalStyled>
